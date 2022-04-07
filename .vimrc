@@ -1,5 +1,10 @@
 set nocompatible              " required
 filetype off                  " required
+set encoding=utf-8
+
+let python_highlight_all=1
+syntax on
+set nu
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -9,33 +14,57 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
- Plugin 'gmarik/Vundle.vim'
- Plugin 'tmhedberg/SimpylFold'
- Plugin 'vim-scripts/indentpython.vim'
- Plugin 'Valloric/YouCompleteMe'
- Plugin 'nvie/vim-flake8'
- Plugin 'scrooloose/nerdtree'
- Plugin 'jistr/vim-nerdtree-tabs'
- Plugin 'jiangmiao/auto-pairs'
- Plugin 'fatih/vim-go'
+Plugin 'gmarik/Vundle.vim'
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
 
-
-"
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'tmsvg/pear-tree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set encoding=utf-8
+" Theme
+set background=dark
+colorscheme solarized
 
+" Automatically closing braces
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+" NERD Tree
+let NERDTreeIgnore=['\.pyc$', '\~$']
 nmap <F6> :NERDTreeToggle<CR>
 
-au BufWritePost *.go !gofmt -w %
+" Plugin Config
+" SimplyFold
+let g:SimpylFold_docstring_preview=1
 
-set nu
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Enable folding
 set foldmethod=indent
@@ -44,6 +73,15 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 
-syntax enable
-set background=dark
-colorscheme solarized
+" PEP 8 Formatting
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+" Set Python Column Width to 80
+:set colorcolumn=80
