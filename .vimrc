@@ -22,13 +22,14 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-syntastic/syntastic'
+Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'tmsvg/pear-tree'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -72,6 +73,9 @@ set foldlevel=99
 
 " Enable folding with the spacebar
 nnoremap <space> za
+
+set tabstop=4
+set shiftwidth=4
 
 " PEP 8 Formatting
 au BufNewFile,BufRead *.py
