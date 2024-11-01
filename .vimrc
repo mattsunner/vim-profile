@@ -21,7 +21,6 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'dense-analysis/ale'
 Plugin 'nvie/vim-flake8'
 Plugin 'altercation/vim-colors-solarized'
@@ -44,18 +43,9 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
-" NERD Tree
-let NERDTreeIgnore=['\.pyc$', '\~$']
-nmap <F6> :NERDTreeToggle<CR>
-
 " Plugin Config
 " SimplyFold
 let g:SimpylFold_docstring_preview=1
-
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
